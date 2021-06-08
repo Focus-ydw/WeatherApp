@@ -6,6 +6,7 @@ import org.springframework.web.client.RestTemplate;
 
 import java.sql.Timestamp;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 public class WeatherDaoRemoteImpl implements WeatherDao {
@@ -18,7 +19,7 @@ public class WeatherDaoRemoteImpl implements WeatherDao {
 
     @Override
     public WeatherModel getDetailsByCity(String city) {
-        String url = WeatherConstants.API_URL.replace(WeatherConstants.API_URL_PARAM, city);
+        String url = WeatherConstants.API_URL.replace(WeatherConstants.API_URL_PARAM, city.toLowerCase());
         Map<String, String> details = restTemplate.getForObject(url, HashMap.class);
         return WeatherModel.builder()
                 .city(city)
